@@ -114,10 +114,13 @@ function setupTypingAnimation() {
         'Tech Enthusiast',
         'Open Source Contributor',
         'Software Engineer',
-
     ];
 
     const typedTextElement = document.getElementById('typed-text');
+    
+    // Check if mobile device
+    const isMobile = window.innerWidth <= 768;
+    
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
@@ -133,7 +136,8 @@ function setupTypingAnimation() {
             charIndex++;
         }
 
-        let typeSpeed = isDeleting ? 100 : 150;
+        // Adjust typing speed for mobile
+        let typeSpeed = isDeleting ? (isMobile ? 60 : 100) : (isMobile ? 90 : 150);
 
         if (!isDeleting && charIndex === currentText.length) {
             typeSpeed = 2000;
@@ -148,6 +152,11 @@ function setupTypingAnimation() {
     }
 
     typeText();
+
+    // Handle window resize to update mobile status
+    window.addEventListener('resize', () => {
+        // Optional: Reinitialize on resize if needed
+    });
 }
 
 // Scroll Animations Setup
