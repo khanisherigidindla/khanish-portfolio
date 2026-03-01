@@ -10,6 +10,16 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    middlewareMode: false,
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+    copyPublicDir: true,
+  },
+  publicDir: 'public',
 });
 
 // To build for GitHub Pages with a repo subpath, you can run:
