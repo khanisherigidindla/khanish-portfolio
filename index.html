@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHANISH - Full Stack Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Portfolio</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Elements -->
+    <div class="floating-element" id="floatingCircle1"></div>
+    <div class="floating-element" id="floatingCircle2"></div>
+    <div class="floating-element" id="floatingCircle3"></div>
+
+    <!-- Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Hi, I'm <span class="highlight">Khanish Erigidindla</span>
+                </h1>
+                <p class="hero-subtitle">
+                    I'm a <span class="typed-text" id="typed-text"></span>
+                </p>
+                <p class="hero-description">
+                    
+                    Passionate about building user-friendly web applications and solving problems through code. I enjoy backend development, especially creating scalable APIs, managing databases, and writing secure, efficient server-side logic.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-card">
+                    <div class="profile-img">
+                        <img src="Dp pic.jpg" alt="Khanish Erigidindla">
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/khanish-erigidindla-00a327328/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/khanisherigidindla" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="mailto:khanishram00@gmail.com" class="social-link"><i class="fab fa-google"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Get to know me better</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-description">
+                        I'm a recent Computer Science graduate with a passion for full-stack development, Frontend Developer & Backend Developer. 
+                        I love turning complex problems into simple, beautiful designs and building user-friendly applications.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <h3 class="stat-number" data-target="04">0</h3>
+                            <p class="stat-label">Projects Completed</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="stat-number" data-target="24hr">0</h3>
+                            <p class="stat-label">Hours of Coding</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="stat-number" data-target="8">0</h3>
+                            <p class="stat-label">Technologies</p>
+                        </div>
+                    </div>
+                    <div class="about-actions">
+                        <a href="KHANISH_RESUME___Fresher_2025.pdf" class="btn btn-primary" download>
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
+                        <button class="btn btn-secondary" onclick="toggleBio()">
+                            <i class="fas fa-info-circle"></i> More Info
+                        </button>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-container">
+                        <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Coding workspace">
+                    </div>
+                </div>
+            </div>
+            <div class="bio-toggle" id="bioToggle">
+                <p>
+                    Beyond coding, I'm an avid learner who stays updated with the latest technology trends. 
+                    I enjoy contributing to open-source projects and participating in hackathons. 
+                    When I'm not coding, you can find me reading tech blogs, playing chess, or exploring nature photography.
+                    My passion for continuous learning drives me to explore emerging domains such as cloud computing, AI, and cybersecurity.
+                </p>
+            </div>
+        </div>
+    </section>
+<!-- Education Section -->
+<section id="education" style="padding: 60px 20px; background-color: #111111;">
+  <h2 style="
+    font-size: 32px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  ">
+    Education BackGround
+  </h2>
+
+  <div style="max-width: 900px; margin: 0 auto;">
+    <!-- Education Card 1 -->
+    <div style="
+      background-color: #000000;
+      border-left: 6px solid #60d9fa;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin-bottom: 30px;
+    ">
+      <h3 style="margin-bottom: 5px; color: #ffffff;">B.Tech in Computer Science and Engineering</h3>
+      <p style="margin: 5px 0; font-weight: 500; color: #b0b0b0;">Sree Venkateswara College <span style="float: right;">2021 – 2025</span></p>
+      <p style="margin: 0; color: #b0b0b0;">Percentage: <strong style="color: #60d9fa;">80%</strong></p>
+    </div>
+
+    <!-- Education Card 2 -->
+    <div style="
+      background-color: #000000;
+      border-left: 6px solid #60d9fa;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin-bottom: 30px;
+    ">
+      <h3 style="margin-bottom: 5px; color: #ffffff;">Intermediate (Class XII)</h3>
+      <p style="margin: 5px 0; font-weight: 500; color: #b0b0b0;">Narayana Junior College <span style="float: right;">2019 – 2021</span></p>
+      <p style="margin: 0; color: #b0b0b0;">Percentage: <strong style="color: #60d9fa;">89%</strong></p>
+    </div>
+
+    <!-- Education Card 3 -->
+    <div style="
+      background-color: #000000;
+      border-left: 6px solid #60d9fa;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px 25px;
+    ">
+      <h3 style="margin-bottom: 5px; color: #ffffff;">Secondary School (Class X)</h3>
+      <p style="margin: 5px 0; font-weight: 500; color: #b0b0b0;">Krishnaveni Talent School <span style="float: right;">2018 – 2019</span></p>
+      <p style="margin: 0; color: #b0b0b0;">CGPA: <strong style="color: #60d9fa;">9.5</strong></p>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <p class="section-subtitle">My technical Skills</p>
+            </div>
+            <div class="skills-content">
+                <div class="skill-category" id="frontend-category">
+                    <h3 class="category-title">Frontend</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">CSS</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JAVASCRIPT</span>
+                                <span class="skill-percentage">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">REACT</span>
+                                <span class="skill-percentage">50%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">TypeScript</span>
+                                <span class="skill-percentage">60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="60"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" id="backend-category">
+                    <h3 class="category-title">Backend</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-percentage">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Java</span>
+                                <span class="skill-percentage">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Express/Node.js</span>
+                                <span class="skill-percentage">60%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" id="database-category">
+                    <h3 class="category-title">Database</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">SQL</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">MongoDB</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category" id="others-category">
+                    <h3 class="category-title">Others</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">VSCode</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">MySQL</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Git</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Figma</span>
+                                <span class="skill-percentage">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" style="padding: 60px 20px; background-color: #111111;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                <h2 class="section-title" style="font-size: 32px; color: #ffffff; margin-bottom: 10px; font-weight: 700; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Experience</h2>
+                <p class="section-subtitle" style="color: #b0b0b0; font-size: 18px;">My professional journey</p>
+            </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <!-- Experience Card 1: Codsoft -->
+                <div style="
+                    background-color: #000000;
+                    border-left: 6px solid #60d9fa;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                    border-radius: 12px;
+                    padding: 20px 25px;
+                    margin-bottom: 30px;
+                ">
+                    <h3 style="margin-bottom: 5px; color: #ffffff;">Web Development Intern</h3>
+                    <p style="margin: 5px 0; font-weight: 500; color: #b0b0b0;">Codsoft <span style="float: right;">25-08-2024 – 25-09-2024</span></p>
+                    <p style="margin: 0; color: #b0b0b0;">Gained hands-on experience in web development technologies and project implementation.</p>
+                </div>
+
+                <!-- Experience Card 2: Brain-O-Vision -->
+                <div style="
+                    background-color: #000000;
+                    border-left: 6px solid #60d9fa;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                    border-radius: 12px;
+                    padding: 20px 25px;
+                    margin-bottom: 30px;
+                ">
+                    <h3 style="margin-bottom: 5px; color: #ffffff;">MERN Stack Internship</h3>
+                    <p style="margin: 5px 0; font-weight: 500; color: #b0b0b0;">Brain-O-Vision <span style="float: right;">23-12-2024 – 12-04-2025</span></p>
+                    <p style="margin: 0; color: #b0b0b0;">Working on full-stack development with MongoDB, Express.js, React, and Node.js.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title"> Projects</h2>
+                <p class="section-subtitle">Some of my recent work</p>
+            </div>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Apps</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="backend">Backend</button>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=600" alt="E-commerce Platform">
+                        <div class="project-overlay">
+                            <button class="project-btn" onclick="openModal('project1')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <a href="#" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">E-commerce Platform</h3>
+                        <p class="project-description">Full-stack e-commerce solution with React, Node.js, Express.js and MongoDB</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Express.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600" alt="AI Powered Chatbot">
+                        <div class="project-overlay">
+                            <button class="project-btn" onclick="openModal('project2')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <a href="#" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">AI Powered Chatbot</h3>
+                        <p class="project-description">Intelligent chatbot using Python full stack technologies with NLP capabilities</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">TensorFlow</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="backend">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Quiz Management System">
+                        <div class="project-overlay">
+                            <button class="project-btn" onclick="openModal('project3')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <a href="#" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Quiz Management System</h3>
+                        <p class="project-description">Comprehensive quiz platform with Python backend and SQL database</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-image">
+                        <img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Task Management System">
+                        <div class="project-overlay">
+                            <button class="project-btn" onclick="openModal('project4')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <a href="#" class="project-btn">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-btn">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Task Management System</h3>
+                        <p class="project-description">Full-stack task management application with MERN stack</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Express.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+                <p class="section-subtitle">My professional achievements</p>
+            </div>
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-title">Python Developer Certification</h3>
+                        <p class="cert-issuer">CSES</p>
+                        <p class="cert-date">2024</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-title">Web Developer Intern</h3>
+                        <p class="cert-issuer">CODSOFT</p>
+                        <p class="cert-date">2023</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-title">Cloud Computing</h3>
+                        <p class="cert-issuer">NTPEL</p>
+                        <p class="cert-date">2024</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-title">Devops with AWS Cloud Workshop</h3>
+                        <p class="cert-issuer">SVCN</p>
+                        <p class="cert-date">2024</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-title">AI Workshop</h3>
+                        <p class="cert-issuer">BE10X</p>
+                        <p class="cert-date">2024</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-title">Java Certification</h3>
+                        <p class="cert-issuer">Scaler</p>
+                        <p class="cert-date">2024</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-title">MERN Stack Internship</h3>
+                        <p class="cert-issuer">Brain-O-Vision</p>
+                        <p class="cert-date">2024</p>
+                    </div>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-title">Deep Learning Certifications</h3>
+                        <p class="cert-issuer">NTPEL</p>
+                        <p class="cert-date">2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's work together</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>khanishram00@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+91 9392997308 </p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Hyderabad, India</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        <span class="error-message" id="subjectError"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        <span class="error-message" id="messageError"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-btn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+<!---->
+
+<!-- Thank You Section -->
+<section id="thank-you" style="
+    background-color: #1a1a1a;
+    padding: 50px 20px;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-top: 5px solid #60d9fa;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+">
+  <h2 style="font-size: 36px; margin-bottom: 20px; color: #ffffff;">
+    Thank You for Visiting!
+  </h2>
+  <p style="font-size: 18px; margin-bottom: 30px;">
+    I appreciate your time exploring my portfolio. Feel free to connect with me for any opportunities, collaborations, or discussions!
+  </p>
+
+  <img id="thank-you-image" src="Thank You.png" 
+       alt="Thank You Illustration" 
+       style="max-width: 400px; width: 100%; border-radius: 20px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); border: 4px solid #60d9fa; transition: transform 0.5s ease;" />
+
+  <p style="margin-top: 30px; font-size: 16px;">
+    — Khanish Erigidindla
+  </p>
+</section>
+
+<script>
+  // Add hover zoom animation to the thank you image
+  const img = document.getElementById('thank-you-image');
+  img.addEventListener('mouseover', () => {
+    img.style.transform = 'scale(1.05)';
+  });
+  img.addEventListener('mouseout', () => {
+    img.style.transform = 'scale(1)';
+  });
+</script>
+
+
+
+
+<!---->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+            <div class="footer-text">
+                <p>&copy; 2025 Khanish Erigidindla. All rights reserved.</p>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/khanish-erigidindla-00a327328/https://www.linkedin.com/in/khanish-erigidindla-00a327328/" class="social-link" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/khanisherigidindla" class="social-link" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/" class="social-link" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/vip_khanish_ram/" class="social-link" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modals -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
