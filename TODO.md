@@ -1,0 +1,1 @@
+- [x] Add & commit changes: git add index.html && git commit -m "Update portfolio index.html with latest features and Vercel fixes"&#10;- [x] Push to main: git push origin main (remote fixed to .git, commit b935170 pushed successfully)
