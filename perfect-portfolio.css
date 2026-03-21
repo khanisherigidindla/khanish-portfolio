@@ -1,0 +1,54 @@
+
+#learning-path {
+  background: linear-gradient(135deg, var(--white), #d1fae5 100%);
+}
+
+#learning-path .section-title {
+  color: #10b981 !important;
+  text-shadow: 0 4px 12px rgba(16,185,129,0.3);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 3rem;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 25px rgba(16,185,129,0.4);
+}
+
+.timeline-content h3 {
+  color: #065f46;
+  margin-bottom: 0.5rem;
+}
+
+.progress-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.progress-badge.in-progress {
+  background: rgba(16,185,129,0.2);
+  color: #10b981;
+}
+
+@media (max-width: 768px) {
+  #learning-path .section-header {
+    text-align: center !important;
+  }
+}

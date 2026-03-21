@@ -1,0 +1,132 @@
+/* Professional White/Blue Theme - Unique Sections */
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fbff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --accent-blue: #3b82f6;
+  --accent-gradient: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --border-radius: 20px;
+  --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.section:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: var(--accent-gradient);
+  border-radius: 2px;
+}
+
+/* Experience - Wave Cards */
+.experience-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.experience-item {
+  background: rgba(255,255,255,0.9);
+  border-left: 5px solid var(--accent-blue);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.experience-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(59,130,246,0.2);
+}
+
+.experience-title {
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.experience-company {
+  font-weight: 600;
+  color: var(--accent-blue);
+}
+
+/* Education - Timeline */
+.education-timeline {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.education-item {
+  display: flex;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.education-card {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  width: 45%;
+  box-shadow: var(--shadow-md);
+}
+
+.education-icon {
+  position: absolute;
+  top: 20px;
+  width: 60px;
+  height: 60px;
+  background: var(--accent-gradient);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(59,130,246,0.4);
+}
+
+/* Skills - Grid */
+.skill-category {
+  background: rgba(255,255,255,0.8);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+  box-shadow: var(--shadow-md);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px,1fr));
+  gap: 1.5rem;
+}
+
+.skill-item:hover {
+  transform: translateY(-8px);
+}
+
+/* Certifications - Cards */
+.cert-card {
+  background: rgba(255,255,255,0.9);
+  border-left: 4px solid var(--accent-blue);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.cert-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(59,130,246,0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .experience-grid { grid-template-columns: 1fr; }
+  .education-item { flex-direction: column; }
+}

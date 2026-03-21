@@ -1,133 +1,236 @@
-// Global variables
-let isDragging = false;
-let currentDragElement = null;
-let offset = { x: 0, y: 0 };
+// ===== COMPLETE FUNCTIONAL PORTFOLIO JAVASCRIPT =====
 
-// DOM Content Loaded
-document.addEventListener('DOMContentLoaded', function () {
+// Global Variables
+let isDarkMode = false;
+let typingSpeed = 50;
+let currentTypingIndex = 0;
+
+// Typing texts for the hero section
+const typingTexts = [
+    'Full Stack Developer',
+    'Web Developer',
+    'Backend Specialist',
+    'Problem Solver',
+    'Tech Enthusiast'
+];
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('✅ Portfolio loaded successfully');
     initializeApp();
 });
 
-// Initialize Application
 function initializeApp() {
     setupNavigation();
+    setupMobileMenu();
+    setupSmoothScrolling();
     setupTypingAnimation();
     setupScrollAnimations();
-    setupFloatingElements();
-    setupParticles();
-    setupSkillBars();
     setupProjectFilters();
-    setupContactForm();
     setupStatsCounter();
-    setupMobileMenu();
-    setupOfferings();
+    setupContactForm();
+    // setupServiceModal(); // Commented out to use the new inquiry form
+    setupBioToggle();
+    setupNavbarScroll();
 }
 
-// Navigation Setup
+// Global function for onclick
+function openServiceModal(service) {
+    const modal = document.getElementById('serviceModal');
+    if (!modal) return;
+    
+    const serviceDefaults = {
+        'Web Development': {
+            projectType: 'web-app',
+            title: 'Business Website / Web Application',
+            stack: 'HTML, CSS, JavaScript / React, Node.js',
+            description: 'Need a professional web solution with responsive UI, clean design, and required business functionality.'
+        },
+        'Mobile Apps': {
+            projectType: 'mobile-app',
+            title: 'Mobile Application Development',
+            stack: 'React Native / Flutter',
+            description: 'Need a mobile application with user-friendly design, smooth performance, and essential app features.'
+        },
+        'Backend APIs': {
+            projectType: 'api-backend',
+            title: 'Backend API Development',
+            stack: 'Node.js, Express / Python, Flask',
+            description: 'Need secure and scalable backend APIs with database integration, authentication, and clean architecture.'
+        },
+        'Full Stack': {
+            projectType: 'full-stack',
+            title: 'Full Stack Project Development',
+            stack: 'MERN / Python Full Stack',
+            description: 'Need a complete frontend, backend, and database solution for an end-to-end application.'
+        },
+        'Database': {
+            projectType: 'other',
+            title: 'Database Design / Optimization',
+            stack: 'MySQL / MongoDB / PostgreSQL',
+            description: 'Need database design, schema planning, query optimization, and data handling support.'
+        },
+        'Deployment': {
+            projectType: 'other',
+            title: 'Deployment & Cloud Setup',
+            stack: 'Docker, AWS / Azure / Vercel',
+            description: 'Need deployment support, hosting setup, and production-ready configuration for the project.'
+        }
+    };
+    
+    const title = document.getElementById('serviceModalTitle');
+    const subtitle = document.getElementById('serviceModalSubtitle');
+    const typeInput = document.getElementById('serviceType');
+    const projectType = document.getElementById('projectType');
+    const projectTitle = document.getElementById('serviceProjectTitle');
+    const projectStack = document.getElementById('serviceTechStack');
+    const projectDescription = document.getElementById('serviceProjectDescription');
+    const defaults = serviceDefaults[service];
+    
+    if (title) title.textContent = service;
+    if (subtitle) subtitle.textContent = `Let's discuss your ${service} project`;
+    if (typeInput) typeInput.value = service;
+
+    if (defaults) {
+        if (projectType) projectType.value = defaults.projectType;
+        if (projectTitle) projectTitle.value = defaults.title;
+        if (projectStack) projectStack.value = defaults.stack;
+        if (projectDescription) projectDescription.value = defaults.description;
+    }
+    
+    modal.style.display = 'flex';
+    modal.style.visibility = 'visible';
+    modal.style.zIndex = '2000';
+}
+
+function showFreelanceInquiry() {
+    const inquirySection = document.getElementById('freelance-inquiry');
+    if (inquirySection) {
+        inquirySection.style.display = 'block';
+        inquirySection.scrollIntoView({ behavior: 'smooth' });
+        console.log('Freelance inquiry section shown');
+    } else {
+        console.log('Freelance inquiry section not found');
+    }
+}
+
+function hideFreelanceInquiry() {
+    const inquirySection = document.getElementById('freelance-inquiry');
+    if (inquirySection) {
+        inquirySection.style.display = 'none';
+        console.log('Freelance inquiry section hidden');
+    }
+}
+
+// ===== NAVBAR & NAVIGATION =====
 function setupNavigation() {
-    const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
-
-    // Smooth scrolling for navigation links
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    // Active link highlighting on scroll
+    window.addEventListener('scroll', () => {
+        updateActiveLink();
+    });
+    
+    // Hamburger menu toggle
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+    
+    // Close menu when link is clicked
     navLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+        link.addEventListener('click', () => {
+            hamburger?.classList.remove('active');
+            navMenu?.classList.remove('active');
         });
     });
+}
 
-    // Navbar background on scroll
-    window.addEventListener('scroll', function () {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-
-        // Update active navigation link
-        updateActiveNavLink();
+function setupMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger?.classList.remove('active');
+            navMenu?.classList.remove('active');
+        });
     });
 }
 
-// Update active navigation link based on current section
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section[id]');
+function updateActiveLink() {
+    const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
-
-    let currentSection = '';
-
+    
+    let current = '';
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
-
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-            currentSection = section.getAttribute('id');
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 300) {
+            current = section.getAttribute('id');
         }
     });
-
+    
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
+        if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
         }
     });
 }
 
-// Mobile Menu Setup
-function setupMobileMenu() {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-
-    hamburger.addEventListener('click', function () {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+function setupNavbarScroll() {
+    const navbar = document.getElementById('navbar');
+    let lastScrollTop = 0;
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+        lastScrollTop = window.pageYOffset;
     });
+}
 
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function () {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+// ===== SMOOTH SCROLLING =====
+function setupSmoothScrolling() {
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href !== '#serviceModal') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
         });
     });
 }
 
-// Typing Animation Setup
+// ===== TYPING ANIMATION =====
 function setupTypingAnimation() {
-    const texts = [
-        'Full Stack Developer',
-        'Web Developer',
-        'Backend Engineer',
-        'React Developer',
-        'SQL Developer',
-        'JavaScript Lover',
-        'Problem Solver',
-        'Tech Enthusiast',
-        'Open Source Contributor',
-        'Software Engineer',
-    ];
-
     const typedTextElement = document.getElementById('typed-text');
-    
-    // Check if mobile device
-    const isMobile = window.innerWidth <= 768;
+    if (!typedTextElement) return;
     
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-
-    function typeText() {
-        const currentText = texts[textIndex];
-
+    
+    function type() {
+        const currentText = typingTexts[textIndex];
+        
         if (isDeleting) {
             typedTextElement.textContent = currentText.substring(0, charIndex - 1);
             charIndex--;
@@ -135,364 +238,68 @@ function setupTypingAnimation() {
             typedTextElement.textContent = currentText.substring(0, charIndex + 1);
             charIndex++;
         }
-
-        // Adjust typing speed for mobile
-        let typeSpeed = isDeleting ? (isMobile ? 60 : 100) : (isMobile ? 90 : 150);
-
+        
         if (!isDeleting && charIndex === currentText.length) {
-            typeSpeed = 2000;
             isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
+            setTimeout(type, 2000);
+            return;
+        }
+        
+        if (isDeleting && charIndex === 0) {
             isDeleting = false;
-            textIndex = (textIndex + 1) % texts.length;
-            typeSpeed = 500;
+            textIndex = (textIndex + 1) % typingTexts.length;
+            setTimeout(type, 500);
+            return;
         }
-
-        setTimeout(typeText, typeSpeed);
+        
+        setTimeout(type, isDeleting ? 25 : 50);
     }
-
-    typeText();
-
-    // Handle window resize to update mobile status
-    window.addEventListener('resize', () => {
-        // Optional: Reinitialize on resize if needed
-    });
+    
+    type();
 }
 
-// Scroll Animations Setup
+// ===== SCROLL ANIMATIONS =====
 function setupScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function (entries) {
+    const elements = document.querySelectorAll('.project-card, .cert-card, .experience-item, .skill-item, .education-card');
+    
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, observerOptions);
-
-    // Add animation classes to elements
-    const animatedElements = document.querySelectorAll(
-        '.about-text, .about-image, .skill-category, .project-card, .cert-card, .contact-item, .contact-form'
-    );
-
-    animatedElements.forEach((element, index) => {
-        if (element.classList.contains('about-text') || element.classList.contains('contact-form')) {
-            element.classList.add('slide-in-left');
-        } else if (element.classList.contains('about-image') || element.classList.contains('contact-item')) {
-            element.classList.add('slide-in-right');
-        } else {
-            element.classList.add('fade-in');
-            element.style.transitionDelay = `${index * 0.1}s`;
-        }
-
-        observer.observe(element);
+    }, { threshold: 0.1 });
+    
+    elements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
     });
 }
 
-// Floating Elements Setup (Draggable)
-function setupFloatingElements() {
-    const floatingElements = document.querySelectorAll('.floating-element');
-
-    floatingElements.forEach(element => {
-        // Mouse events
-        element.addEventListener('mousedown', startDrag);
-
-        // Touch events for mobile
-        element.addEventListener('touchstart', startDrag, { passive: false });
-
-        // Add hover effect
-        element.addEventListener('mouseenter', function () {
-            this.style.transform += ' scale(1.1)';
-        });
-
-        element.addEventListener('mouseleave', function () {
-            if (!isDragging) {
-                this.style.transform = this.style.transform.replace(' scale(1.1)', '');
-            }
-        });
-    });
-
-    // Global mouse/touch move and up events
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', stopDrag);
-    document.addEventListener('touchmove', drag, { passive: false });
-    document.addEventListener('touchend', stopDrag);
-}
-
-function startDrag(e) {
-    isDragging = true;
-    currentDragElement = e.target;
-
-    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-    const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-
-    const rect = currentDragElement.getBoundingClientRect();
-    offset.x = clientX - rect.left;
-    offset.y = clientY - rect.top;
-
-    currentDragElement.style.cursor = 'grabbing';
-    currentDragElement.style.zIndex = '1000';
-
-    e.preventDefault();
-}
-
-function drag(e) {
-    if (!isDragging || !currentDragElement) return;
-
-    const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-    const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-
-    const newX = clientX - offset.x;
-    const newY = clientY - offset.y;
-
-    // Keep element within window bounds
-    const maxX = window.innerWidth - currentDragElement.offsetWidth;
-    const maxY = window.innerHeight - currentDragElement.offsetHeight;
-
-    const constrainedX = Math.max(0, Math.min(newX, maxX));
-    const constrainedY = Math.max(0, Math.min(newY, maxY));
-
-    currentDragElement.style.left = constrainedX + 'px';
-    currentDragElement.style.top = constrainedY + 'px';
-    currentDragElement.style.right = 'auto';
-    currentDragElement.style.bottom = 'auto';
-
-    e.preventDefault();
-}
-
-function stopDrag() {
-    if (isDragging && currentDragElement) {
-        currentDragElement.style.cursor = 'move';
-        currentDragElement.style.zIndex = '-1';
-        currentDragElement.style.transform = currentDragElement.style.transform.replace(' scale(1.1)', '');
-    }
-
-    isDragging = false;
-    currentDragElement = null;
-}
-
-// Particles Background Setup
-function setupParticles() {
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = 50;
-
-    for (let i = 0; i < particleCount; i++) {
-        createParticle(particlesContainer);
-    }
-
-    // Create new particles periodically
-    setInterval(() => {
-        if (particlesContainer.children.length < particleCount) {
-            createParticle(particlesContainer);
-        }
-    }, 3000);
-}
-
-function createParticle(container) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-
-    // Random starting position
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-    particle.style.animationDelay = Math.random() * 5 + 's';
-
-    container.appendChild(particle);
-
-    // Remove particle after animation
-    setTimeout(() => {
-        if (particle.parentNode) {
-            particle.parentNode.removeChild(particle);
-        }
-    }, 20000);
-}
-
-// Skill Bars Animation
-function setupSkillBars() {
-    const skillBars = document.querySelectorAll('.skill-progress');
-
-    const skillObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const skillBar = entry.target;
-                const width = skillBar.getAttribute('data-width');
-                skillBar.style.width = width + '%';
-                skillObserver.unobserve(skillBar);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    skillBars.forEach(bar => {
-        skillObserver.observe(bar);
-    });
-}
-
-// Project Filters Setup
-function setupProjectFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const filter = this.getAttribute('data-filter');
-
-            // Update active button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-
-            // Filter projects
-            projectCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-
-                if (filter === 'all' || category === filter) {
-                    card.classList.remove('hidden');
-                    setTimeout(() => {
-                        card.style.display = 'block';
-                    }, 10);
-                } else {
-                    card.classList.add('hidden');
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-}
-
-// Contact Form Setup
-function setupContactForm() {
-    const form = document.getElementById('contactForm');
-    const submitBtn = form.querySelector('.submit-btn');
-
-    // Real-time validation
-    const inputs = form.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('blur', function () {
-            validateField(this);
-        });
-
-        input.addEventListener('input', function () {
-            if (this.classList.contains('error')) {
-                validateField(this);
-            }
-        });
-    });
-
-    // Form submission
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        let isValid = true;
-        inputs.forEach(input => {
-            if (!validateField(input)) {
-                isValid = false;
-            }
-        });
-
-        if (isValid) {
-            submitForm(form, submitBtn);
-        }
-    });
-}
-
-function validateField(field) {
-    const value = field.value.trim();
-    const fieldName = field.name;
-    const errorElement = document.getElementById(fieldName + 'Error');
-
-    let isValid = true;
-    let errorMessage = '';
-
-    // Check if field is empty
-    if (value === '') {
-        isValid = false;
-        errorMessage = `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
-    } else {
-        // Specific validation rules
-        switch (fieldName) {
-            case 'email':
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(value)) {
-                    isValid = false;
-                    errorMessage = 'Please enter a valid email address';
-                }
-                break;
-            case 'name':
-                if (value.length < 2) {
-                    isValid = false;
-                    errorMessage = 'Name must be at least 2 characters long';
-                }
-                break;
-            case 'message':
-                if (value.length < 10) {
-                    isValid = false;
-                    errorMessage = 'Message must be at least 10 characters long';
-                }
-                break;
-        }
-    }
-
-    // Update UI
-    if (isValid) {
-        field.classList.remove('error');
-        errorElement.textContent = '';
-    } else {
-        field.classList.add('error');
-        errorElement.textContent = errorMessage;
-    }
-
-    return isValid;
-}
-
-function submitForm(form, submitBtn) {
-    // Show loading state
-    submitBtn.classList.add('loading');
-    submitBtn.disabled = true;
-
-    // Simulate form submission
-    setTimeout(() => {
-        // Hide loading state
-        submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
-
-        // Show success message
-        alert('Thank you for your message! I\'ll get back to you soon.');
-
-        // Reset form
-        form.reset();
-    }, 2000);
-}
-
-// Stats Counter Animation
+// ===== STATS COUNTER ANIMATION =====
 function setupStatsCounter() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-
-    const statsObserver = new IntersectionObserver(function (entries) {
+    const statElements = document.querySelectorAll('.anim-count');
+    
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const target = parseInt(entry.target.getAttribute('data-target'));
-                animateCounter(entry.target, target);
-                statsObserver.unobserve(entry.target);
+                animateCounter(entry.target);
             }
         });
     }, { threshold: 0.5 });
-
-    statNumbers.forEach(stat => {
-        statsObserver.observe(stat);
-    });
+    
+    statElements.forEach(el => observer.observe(el));
 }
 
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 50;
+function animateCounter(element) {
+    const target = parseFloat(element.dataset.target);
     const duration = 2000;
-    const stepTime = duration / 50;
-
+    const increment = target / (duration / 16);
+    let current = 0;
+    
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
@@ -501,206 +308,632 @@ function animateCounter(element, target) {
         } else {
             element.textContent = Math.floor(current);
         }
-    }, stepTime);
+    }, 16);
 }
 
-// Modal Functions
-function openModal(projectId) {
-    const modal = document.getElementById('projectModal');
-    const modalBody = document.getElementById('modalBody');
+// ===== PROJECT FILTERING =====
+function setupProjectFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            const filter = btn.dataset.filter;
+            
+            projectCards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else if (card.dataset.category.includes(filter)) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        });
+    });
+}
 
-    // Project data
-    const projectData = {
-        project1: {
-            title: 'E-commerce Platform',
-            image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
-            description: 'A full-featured e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, product catalog, shopping cart, payment integration, and admin dashboard.',
-            technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'JWT', 'Express'],
-            features: [
-                'User authentication and authorization',
-                'Product catalog with search and filters',
-                'Shopping cart and wishlist functionality',
-                'Secure payment processing with Stripe',
-                'Order tracking and history',
-                'Admin dashboard for inventory management'
-            ],
-            github: '#',
-            live: '#'
+// ===== CONTACT FORM =====
+function setupContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name')?.value;
+        const email = document.getElementById('email')?.value;
+        const subject = document.getElementById('subject')?.value;
+        const message = document.getElementById('message')?.value;
+        
+        // Basic validation
+        if (!name || !email || !subject || !message) {
+            showAlert('Please fill all fields', 'error');
+            return;
+        }
+        
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showAlert('Please enter a valid email', 'error');
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="btn-text">Sending...</span><span class="btn-loader"></span>';
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+        
+        // Simulate sending with delay
+        setTimeout(() => {
+            // Hide form and show success message
+            contactForm.style.display = 'none';
+            const successMessage = document.getElementById('contactSuccessMessage');
+            document.getElementById('confirmEmail').textContent = email;
+            successMessage.style.display = 'block';
+            successMessage.classList.add('show-success');
+            
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Reset form for next use (optional)
+            contactForm.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        }, 1500);
+    });
+}
+
+// ===== SERVICE/FREELANCE MODAL =====
+function setupServiceModal() {
+    const modal = document.getElementById('serviceModal');
+    const serviceHireBtns = document.querySelectorAll('.service-hire-btn');
+    const closeBtn = document.getElementById('closeServiceModal');
+    const serviceForm = document.getElementById('serviceForm');
+    
+    // Debug logging
+    console.log('🔧 Service Modal Setup:');
+    console.log('   Modal element:', modal ? '✓ Found' : '✗ NOT FOUND');
+    console.log('   Hire buttons found:', serviceHireBtns.length);
+    console.log('   Close button:', closeBtn ? '✓ Found' : '✗ NOT FOUND');
+    console.log('   Service form:', serviceForm ? '✓ Found' : '✗ NOT FOUND');
+    
+    if (!modal) {
+        console.error('❌ Service modal not found! Modal functionality disabled.');
+        return;
+    }
+    
+    const serviceDefaults = {
+        'Web Development': {
+            projectType: 'web-app',
+            title: 'Business Website / Web Application',
+            stack: 'HTML, CSS, JavaScript / React, Node.js',
+            description: 'Need a professional web solution with responsive UI, clean design, and required business functionality.'
         },
-        project2: {
-            title: 'Task Management App',
-            image: 'https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800',
-            description: 'A collaborative task management application with real-time updates. Built with React, Socket.io, and Express for seamless team collaboration.',
-            technologies: ['React', 'Socket.io', 'Express', 'MongoDB', 'JWT'],
-            features: [
-                'Real-time task updates',
-                'Team collaboration tools',
-                'Project organization',
-                'Due date reminders',
-                'File attachments',
-                'Activity tracking'
-            ],
-            github: '#',
-            live: '#'
+        'Mobile Apps': {
+            projectType: 'mobile-app',
+            title: 'Mobile Application Development',
+            stack: 'React Native / Flutter',
+            description: 'Need a mobile application with user-friendly design, smooth performance, and essential app features.'
         },
-        project3: {
-            title: 'React Native Social App',
-            image: 'https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=800',
-            description: 'A cross-platform social media application built with React Native, featuring real-time messaging, photo sharing, and social interactions.',
-            technologies: ['React Native', 'Firebase', 'Redux', 'Expo'],
-            features: [
-                'User profiles and authentication',
-                'Photo and video sharing',
-                'Real-time messaging',
-                'Social interactions (likes, comments)',
-                'Push notifications',
-                'Offline support'
-            ],
-            github: '#',
-            live: '#'
+        'Backend APIs': {
+            projectType: 'api-backend',
+            title: 'Backend API Development',
+            stack: 'Node.js, Express / Python, Flask',
+            description: 'Need secure and scalable backend APIs with database integration, authentication, and clean architecture.'
         },
-        project4: {
-            title: 'REST API Server',
-            image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
-            description: 'A scalable REST API server built with Node.js and Express, featuring JWT authentication, rate limiting, and comprehensive documentation.',
-            technologies: ['Node.js', 'Express', 'JWT', 'MongoDB', 'Swagger'],
-            features: [
-                'RESTful API design',
-                'JWT authentication',
-                'Rate limiting and security',
-                'Input validation',
-                'Comprehensive documentation',
-                'Error handling and logging'
-            ],
-            github: '#',
-            live: '#'
+        'Full Stack': {
+            projectType: 'full-stack',
+            title: 'Full Stack Project Development',
+            stack: 'MERN / Python Full Stack',
+            description: 'Need a complete frontend, backend, and database solution for an end-to-end application.'
+        },
+        'Database': {
+            projectType: 'other',
+            title: 'Database Design / Optimization',
+            stack: 'MySQL / MongoDB / PostgreSQL',
+            description: 'Need database design, schema planning, query optimization, and data handling support.'
+        },
+        'Deployment': {
+            projectType: 'other',
+            title: 'Deployment & Cloud Setup',
+            stack: 'Docker, AWS / Azure / Vercel',
+            description: 'Need deployment support, hosting setup, and production-ready configuration for the project.'
         }
     };
 
-    const project = projectData[projectId];
-    if (!project) return;
+    // Open modal - with improved event handling
+    serviceHireBtns.forEach((btn, index) => {
+        console.log(`   Button ${index + 1}: ${btn.dataset.service}`);
+        
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log(`✅ Clicked: ${btn.dataset.service}`);
+            
+            const service = btn.dataset.service;
+            const title = document.getElementById('serviceModalTitle');
+            const subtitle = document.getElementById('serviceModalSubtitle');
+            const typeInput = document.getElementById('serviceType');
+            const projectType = document.getElementById('projectType');
+            const projectTitle = document.getElementById('serviceProjectTitle');
+            const projectStack = document.getElementById('serviceTechStack');
+            const projectDescription = document.getElementById('serviceProjectDescription');
+            const defaults = serviceDefaults[service];
+            
+            if (title) title.textContent = service;
+            if (subtitle) subtitle.textContent = `Let's discuss your ${service} project`;
+            if (typeInput) typeInput.value = service;
 
+            if (defaults) {
+                if (projectType) projectType.value = defaults.projectType;
+                if (projectTitle) projectTitle.value = defaults.title;
+                if (projectStack) projectStack.value = defaults.stack;
+                if (projectDescription) projectDescription.value = defaults.description;
+            }
+            
+            // Show modal
+            modal.style.display = 'flex';
+            modal.style.visibility = 'visible';
+            modal.style.zIndex = '2000';
+            console.log('✅ Modal displayed');
+        });
+    });
+    
+    // Close modal - improved handlers
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            modal.style.display = 'none';
+            console.log('✅ Modal closed via close button');
+        });
+    }
+    
+    // Close on background click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            e.preventDefault();
+            e.stopPropagation();
+            modal.style.display = 'none';
+            console.log('✅ Modal closed via background click');
+        }
+    });
+    
+    // Form submission with logging
+    if (serviceForm) {
+        serviceForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('📝 Service form submitted');
+
+            // Collect form data
+            const formData = new FormData(serviceForm);
+            const inquiryData = {
+                serviceType: formData.get('serviceType'),
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                company: formData.get('company'),
+                projectType: formData.get('projectType'),
+                title: formData.get('title'),
+                stack: formData.get('stack'),
+                description: formData.get('description'),
+                duration: formData.get('duration'),
+                budget: formData.get('budget'),
+                priority: formData.get('priority'),
+                deadline: formData.get('deadline'),
+                requirements: formData.get('requirements'),
+                additionalNotes: formData.get('additionalNotes'),
+                files: formData.getAll('files')
+            };
+
+            // Validate required fields
+            const requiredFields = ['name', 'email', 'projectType', 'title', 'stack', 'description', 'duration', 'budget', 'priority'];
+            const missingFields = requiredFields.filter(field => !inquiryData[field]);
+
+            if (missingFields.length > 0) {
+                console.warn('⚠️ Missing fields:', missingFields);
+                showAlert(`Please fill in all required fields: ${missingFields.join(', ')}`, 'error');
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = serviceForm.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<span class="btn-text">Submitting...</span><span class="btn-loader"></span>';
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+
+            // Simulate submission
+            setTimeout(() => {
+                // Log the inquiry data (in a real application, this would be sent to a server)
+                console.log('✅ Service Inquiry Submitted:', inquiryData);
+
+                // Show success message
+                showAlert(`Thank you ${inquiryData.name}! Your ${inquiryData.serviceType} inquiry for "${inquiryData.title}" has been captured successfully. I will review your project details and contact you within 24 hours at ${inquiryData.email}.`, 'success');
+
+                // Reset form and close modal
+                serviceForm.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                modal.style.display = 'none';
+                console.log('✅ Modal closed after submission');
+            }, 1500);
+        });
+    }
+}
+
+// ===== BIO TOGGLE =====
+function setupBioToggle() {
+    const bioToggle = document.getElementById('bioToggle');
+    const moreInfoBtn = document.querySelector('[onclick="toggleBio()"]');
+    
+    if (moreInfoBtn) {
+        moreInfoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (bioToggle) {
+                bioToggle.style.display = bioToggle.style.display === 'none' ? 'block' : 'none';
+                this.textContent = bioToggle.style.display === 'none' ? 'More Info ▼' : 'More Info ▲';
+            }
+        });
+    }
+}
+
+// Global function for toggleBio (for onclick support)
+function toggleBio() {
+    const bioToggle = document.getElementById('bioToggle');
+    if (bioToggle) {
+        bioToggle.style.display = bioToggle.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// ===== PROJECT MODAL =====
+function openModal(projectId) {
+    const modal = document.getElementById('projectModal');
+    const projectData = getProjectData(projectId);
+    
+    if (!projectData) return;
+    
+    const modalBody = document.getElementById('modalBody');
     modalBody.innerHTML = `
-        <div class="modal-project">
-            <img src="${project.image}" alt="${project.title}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
-            <h2 style="margin-bottom: 1rem; color: var(--text-dark);">${project.title}</h2>
-            <p style="margin-bottom: 1.5rem; line-height: 1.6; color: var(--text-light);">${project.description}</p>
-            
-            <h3 style="margin-bottom: 0.5rem; color: var(--text-dark);">Technologies Used:</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
-                ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-            </div>
-            
-            <h3 style="margin-bottom: 0.5rem; color: var(--text-dark);">Key Features:</h3>
-            <ul style="margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--text-light);">
-                ${project.features.map(feature => `<li style="margin-bottom: 0.25rem;">${feature}</li>`).join('')}
-            </ul>
-            
-            <div style="display: flex; gap: 1rem; justify-content: center;">
-                <a href="${project.github}" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <i class="fab fa-github"></i> View Code
-                </a>
-                <a href="${project.live}" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                    <i class="fas fa-external-link-alt"></i> Live Demo
-                </a>
-            </div>
+        <h2>${projectData.title}</h2>
+        <p>${projectData.description}</p>
+        <p><strong>Technologies:</strong> ${projectData.technologies}</p>
+        <p><strong>Features:</strong></p>
+        <ul>
+            ${projectData.features.map(f => `<li>${f}</li>`).join('')}
+        </ul>
+        <div style="margin-top: 20px;">
+            <a href="${projectData.github}" target="_blank" class="btn btn-primary" style="margin-right: 10px;">
+                <i class="fab fa-github"></i> View Code
+            </a>
+            <a href="${projectData.live}" target="_blank" class="btn btn-secondary">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
         </div>
     `;
-
+    
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
     const modal = document.getElementById('projectModal');
     modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
 }
 
-// Bio Toggle Function
-function toggleBio() {
-    const bioToggle = document.getElementById('bioToggle');
-    if (bioToggle.style.display === 'none' || bioToggle.style.display === '') {
-        bioToggle.style.display = 'block';
-    } else {
-        bioToggle.style.display = 'none';
-    }
+function getProjectData(projectId) {
+    const projects = {
+        project1: {
+            title: 'E-commerce Platform',
+            description: 'Full-stack e-commerce solution with modern technologies. A complete marketplace for buying and selling products online.',
+            technologies: 'React, Node.js, Express.js, MongoDB, Stripe',
+            features: [
+                'User authentication & authorization',
+                'Product catalog with filtering',
+                'Shopping cart & checkout',
+                'Payment integration',
+                'Order management',
+                'Admin dashboard'
+            ],
+            github: 'https://github.com/khanisherigidindla',
+            live: '#'
+        },
+        project2: {
+            title: 'AI Powered Chatbot',
+            description: 'Intelligent chatbot using advanced NLP capabilities. Provides smart responses and helps with customer service.',
+            technologies: 'Python, Flask, TensorFlow, NLP',
+            features: [
+                'Natural language processing',
+                'Machine learning model training',
+                'Real-time conversation',
+                'Intent recognition',
+                'Entity extraction',
+                'Multi-language support'
+            ],
+            github: 'https://github.com/khanisherigidindla',
+            live: '#'
+        },
+        project3: {
+            title: 'Quiz Management System',
+            description: 'Comprehensive quiz platform for creating and managing online quizzes with real-time results.',
+            technologies: 'Python, SQL, Flask, MySQL',
+            features: [
+                'Quiz creation interface',
+                'Multiple question types',
+                'Real-time scoring',
+                'User progress tracking',
+                'Detailed analytics',
+                'Certificate generation'
+            ],
+            github: 'https://github.com/khanisherigidindla',
+            live: '#'
+        },
+        project4: {
+            title: 'Task Management System',
+            description: 'Full-stack task management application with collaboration features.',
+            technologies: 'React, Node.js, MongoDB, Express.js',
+            features: [
+                'Task creation & organization',
+                'Team collaboration',
+                'Real-time updates',
+                'Deadline management',
+                'Progress tracking',
+                'Notification system'
+            ],
+            github: 'https://github.com/khanisherigidindla',
+            live: '#'
+        },
+        project5: {
+            title: 'Student Management System',
+            description: 'Comprehensive system for managing student information and academic records.',
+            technologies: 'Python, Flask, MySQL, HTML, CSS, JS',
+            features: [
+                'Student profile management',
+                'Grade tracking',
+                'Attendance management',
+                'Report generation',
+                'Parent portal',
+                'Admin dashboard'
+            ],
+            github: 'https://github.com/khanisherigidindla',
+            live: '#'
+        },
+        project6: {
+            title: 'TO_DO List',
+            description: 'Modern responsive todo application with drag & drop functionality.',
+            technologies: 'HTML, CSS, JavaScript, React',
+            features: [
+                'Task creation & deletion',
+                'Priority levels',
+                'Drag & drop organization',
+                'Local storage persistence',
+                'Search functionality',
+                'Dark mode support'
+            ],
+            github: 'https://github.com/khanisherigidindla',
+            live: '#'
+        },
+        project7: {
+            title: 'Online Grocery Store',
+            description: 'Complete MERN stack grocery e-commerce platform with inventory management.',
+            technologies: 'MongoDB, Express.js, React, Node.js',
+            features: [
+                'Product catalog',
+                'Shopping cart',
+                'Order management',
+                'Inventory tracking',
+                'Payment processing',
+                'Delivery tracking'
+            ],
+            github: 'https://github.com/khanisherigidindla',
+            live: '#'
+        }
+    };
+    
+    return projects[projectId];
 }
 
-// Close modal when clicking outside
-document.addEventListener('click', function (e) {
+// Close modal on background click
+document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('projectModal');
-    if (e.target === modal) {
-        closeModal();
-    }
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-        closeModal();
-    }
-});
-
-// Smooth scroll for all internal links
-document.addEventListener('click', function (e) {
-    if (e.target.matches('a[href^="#"]')) {
-        e.preventDefault();
-        const targetId = e.target.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-
-        if (targetElement) {
-            const offsetTop = targetElement.offsetTop - 70;
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
-        }
-    }
-});
-
-// Performance optimization: Debounce scroll events
-let scrollTimeout;
-window.addEventListener('scroll', function () {
-    if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-    }
-    scrollTimeout = setTimeout(function () {
-        // Additional scroll-based animations can go here
-    }, 10);
-});
-
-// Initialize theme toggle (optional enhancement)
-function initializeTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        document.body.setAttribute('data-theme', savedTheme);
-    }
-}
-
-// Add resize handler for responsive floating elements
-window.addEventListener('resize', function () {
-    const floatingElements = document.querySelectorAll('.floating-element');
-    floatingElements.forEach(element => {
-        // Reset position if element is outside viewport after resize
-        const rect = element.getBoundingClientRect();
-        if (rect.right > window.innerWidth || rect.bottom > window.innerHeight) {
-            element.style.left = '';
-            element.style.top = '';
-            element.style.right = '';
-            element.style.bottom = '';
-        }
-    });
-});
-
-// Offerings Setup
-function setupOfferings() {
-    const headers = document.querySelectorAll('.category-header');
-
-    headers.forEach(header => {
-        header.addEventListener('click', function () {
-            const details = this.nextElementSibling;
-            details.classList.toggle('expanded');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
         });
-    });
+    }
+});
+
+// ===== UTILITY FUNCTIONS =====
+function showAlert(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        padding: 15px 25px;
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+        color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 5000;
+        animation: slideInRight 0.3s ease;
+        max-width: 300px;
+    `;
+    alertDiv.textContent = message;
+    document.body.appendChild(alertDiv);
+    
+    setTimeout(() => {
+        alertDiv.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => alertDiv.remove(), 300);
+    }, 3000);
 }
+
+// ===== SCROLL TO TOP BUTTON =====
+window.addEventListener('scroll', () => {
+    const scrollBtn = document.querySelector('.scroll-to-top');
+    if (scrollBtn) {
+        if (window.pageYOffset > 300) {
+            scrollBtn.style.display = 'block';
+        } else {
+            scrollBtn.style.display = 'none';
+        }
+    }
+});
+
+// ===== EXPERIENCE DETAIL MODAL =====
+function openExperienceModal(experienceId) {
+    const modal = document.getElementById('experienceModal');
+    const modalBody = document.getElementById('experienceModalBody');
+
+    const experienceData = {
+        'software-trainee': {
+            title: 'Software Trainee',
+            company: 'Koundinyasa Technology',
+            duration: 'Feb 9, 2026 – Present',
+            focus: 'Backend Engineering • Database Design • API Systems • Payment/Transaction Logic',
+            responsibilities: [
+                {
+                    title: 'Backend System Development (Node.js + Express)',
+                    details: 'Designed and implemented modular backend architecture using layered patterns: Controller → Service → Repository → Model. Built RESTful APIs with proper HTTP semantics (GET, POST, PUT, DELETE). Implemented input validation using schema-based validation (e.g., Zod / Joi). Applied middleware architecture: Authentication middleware (JWT-based), Error handling middleware (centralized error pipeline), Logging middleware for request tracking.'
+                },
+                {
+                    title: 'Authentication & Authorization',
+                    details: 'Developed secure authentication flows: JWT token generation and validation, Role-based access control (RBAC). Implemented: Login / Signup systems, Password hashing (bcrypt), Token expiration and refresh strategies.'
+                },
+                {
+                    title: 'Payment & Transaction Systems (High-Value Experience)',
+                    details: 'Worked on wallet-to-wallet transaction systems. Integrated payment gateway flows (e.g., PayU-like systems): Hash generation for request validation, Payment request submission, Callback/response verification. Designed: Transaction logging system, Idempotency handling (to prevent duplicate transactions), Failure recovery flows.'
+                },
+                {
+                    title: 'Database Design & Optimization (MongoDB)',
+                    details: 'Designed normalized + scalable schema structures: Users, Wallets, Transactions, KYC data. Implemented: Indexing strategies for performance optimization, Aggregation pipelines for reporting (e.g., transaction summaries). Ensured: Data consistency, Efficient query execution. Worked on: Pagination (skip/limit pattern), Filtering and sorting APIs.'
+                },
+                {
+                    title: 'Admin Panel Backend Support',
+                    details: 'Built APIs for: User management (CRUD), KYC approval/rejection, Wallet freeze/unfreeze, Transaction monitoring. Implemented audit logging for admin actions.'
+                },
+                {
+                    title: 'Security & Best Practices',
+                    details: 'Prevented: SQL/NoSQL injection, Unauthorized access. Applied: Environment variable management, Secure API design principles. Structured code for maintainability and scalability.'
+                }
+            ]
+        },
+        'mern-internship': {
+            title: 'MERN Stack Internship',
+            company: 'Brain-O-Vision',
+            duration: 'Dec 23, 2024 – Apr 12, 2025',
+            focus: 'Full-Stack Development • API Integration • UI + Backend Coordination',
+            responsibilities: [
+                {
+                    title: 'Full-Stack Application Development',
+                    details: 'Built end-to-end applications using: MongoDB (Database), Express.js (Backend), React.js (Frontend), Node.js (Runtime). Developed reusable components in React: Forms, Dashboards, Data tables.'
+                },
+                {
+                    title: 'API Development & Integration',
+                    details: 'Created REST APIs and integrated them with frontend. Managed: Axios/fetch API calls, Error handling on UI. Implemented: Loading states, API response handling patterns.'
+                },
+                {
+                    title: 'State Management',
+                    details: 'Used: React hooks (useState, useEffect). Managed: Form state, Authentication state, API-driven UI updates.'
+                },
+                {
+                    title: 'CRUD Operations (Core Industry Skill)',
+                    details: 'Built full CRUD flows: Create → Insert data into DB, Read → Fetch & display data, Update → Modify records, Delete → Remove safely. Ensured: Data validation both frontend & backend.'
+                },
+                {
+                    title: 'Authentication Flow (Frontend + Backend)',
+                    details: 'Implemented: Login/Register UI, Token storage (localStorage/sessionStorage), Protected routes in React.'
+                },
+                {
+                    title: 'UI/UX Implementation',
+                    details: 'Built responsive layouts. Focused on: Clean UI structure, Component reusability, Form usability.'
+                }
+            ]
+        },
+        'web-development-intern': {
+            title: 'Web Development Intern',
+            company: 'Codsoft',
+            duration: 'Aug 25, 2024 – Sep 25, 2024',
+            focus: 'Frontend Fundamentals • Static + Dynamic Web Development',
+            responsibilities: [
+                {
+                    title: 'Frontend Development',
+                    details: 'Built websites using: HTML5, CSS3, JavaScript. Focused on: Semantic HTML, Responsive design (Flexbox/Grid).'
+                },
+                {
+                    title: 'JavaScript Functionality',
+                    details: 'Implemented: Form validation, DOM manipulation, Event handling. Built interactive UI components.'
+                },
+                {
+                    title: 'Project-Based Learning',
+                    details: 'Delivered mini-projects such as: Portfolio website, Landing pages, Interactive forms. Practiced: Code structuring, File organization.'
+                },
+                {
+                    title: 'Version Control Basics',
+                    details: 'Used Git for: Code tracking, Version management.'
+                }
+            ]
+        }
+    };
+
+    const data = experienceData[experienceId];
+    if (!data) return;
+
+    modalBody.innerHTML = `
+        <div class="experience-modal-header">
+            <h2>${data.title}</h2>
+            <div class="experience-modal-meta">
+                <span class="company">${data.company}</span>
+                <span class="duration">${data.duration}</span>
+            </div>
+            <div class="experience-focus">
+                <strong>Core Role Focus:</strong> ${data.focus}
+            </div>
+        </div>
+        <div class="experience-modal-content">
+            ${data.responsibilities.map(resp => `
+                <div class="experience-section">
+                    <h3>${resp.title}</h3>
+                    <p>${resp.details}</p>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    modal.classList.add('active');
+}
+
+function closeExperienceModal() {
+    const modal = document.getElementById('experienceModal');
+    modal.classList.remove('active');
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown', (e) => {
+    // Close modal on ESC
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('projectModal');
+        const serviceModal = document.getElementById('serviceModal');
+        const experienceModal = document.getElementById('experienceModal');
+        if (modal) modal.classList.remove('active');
+        if (serviceModal) serviceModal.style.display = 'none';
+        if (experienceModal) experienceModal.classList.remove('active');
+    }
+});
+
+console.log('✅ All JavaScript functionality initialized successfully!');

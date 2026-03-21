@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Details - Khanish Erigidindla</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="professional-theme">
+    <!-- Navigation (copied from index.html) -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Portfolio</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="index.html#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="index.html#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="index.html#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="index.html#experience" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Experience Detail Section -->
+    <section class="experience-detail-section section">
+        <div class="container">
+            <!-- Back Button -->
+            <div class="back-button-container" style="margin-bottom: 2rem;">
+                <button class="back-btn" onclick="window.location.href='index.html#experience'">
+                    <i class="fas fa-arrow-left"></i> Back to Experiences
+                </button>
+            </div>
+
+            <!-- Dynamic Content -->
+            <div class="section-header">
+                <h1 class="detail-title" id="detailTitle">Loading...</h1>
+                <p class="detail-subtitle" id="detailSubtitle">Loading role details...</p>
+            </div>
+
+            <div class="detail-content" id="detailContent">
+                <!-- Content populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Role details data
+        const roleDetails = {
+            'Koundinyasa Technology': {
+                title: 'Software Trainee - Koundinyasa Technology',
+                subtitle: 'Feb 9, 2026 – Present | Gaining practical experience in software development and modern technologies',
+                content: `
+                    <div class="detail-card">
+                        <h2>Role Overview</h2>
+                        <p>As a Software Trainee at Koundinyasa Technology, I work on real-world full-stack projects, contributing to production codebases and learning industry best practices. This role bridges my academic knowledge with professional development.</p>
+                    </div>
+
+                    <div class="detail-card">
+                        <h2>Key Responsibilities</h2>
+                        <ul class="detail-list">
+                            <li>Develop and maintain RESTful APIs using Node.js/Express.js and Python/Flask</li>
+                            <li>Build responsive frontend interfaces with React.js and modern CSS frameworks</li>
+                            <li>Design and optimize relational databases (PostgreSQL/MySQL) and NoSQL (MongoDB)</li>
+                            <li>Implement authentication/authorization using JWT and OAuth2</li>
+                            <li>Containerize applications with Docker and deploy to cloud platforms (AWS/Heroku)</li>
+                            <li>Participate in code reviews, agile sprints, and daily stand-ups</li>
+                            <li>Write unit/integration tests with Jest and PyTest</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-card">
+                        <h2>Technologies & Tools</h2>
+                        <div class="tech-grid">
+                            <span class="tech-tag primary">React.js</span>
+                            <span class="tech-tag primary">Node.js</span>
+                            <span class="tech-tag primary">Express.js</span>
+                            <span class="tech-tag primary">Python</span>
+                            <span class="tech-tag secondary">PostgreSQL</span>
+                            <span class="tech-tag secondary">MongoDB</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Git</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">CI/CD</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-card">
+                        <h2>Key Achievements</h2>
+                        <ul class="detail-list">
+                            <li>Optimized API endpoints resulting in 40% faster response times</li>
+                            <li>Contributed to 3 open-source repositories with merged pull requests</li>
+                            <li>Implemented caching strategy reducing database load by 65%</li>
+                            <li>Automated deployment pipeline saving 2 hours weekly</li>
+                            <li>Presented technical demo on microservices architecture to team</li>
+                        </ul>
+                    </div>
+
+                    <div class="detail-card">
+                        <h2>Skills Developed</h2>
+                        <p><strong>Technical:</strong> Full-stack development, API design, database optimization, DevOps basics, testing frameworks</p>
+                        <p><strong>Soft Skills:</strong> Agile methodology, team collaboration, code review processes, technical communication</p>
+                    </div>
+                `
+            },
+            'Codsoft': {
+                title: 'Web Development Intern - Codsoft',
+                subtitle: '25-08-2024 – 25-09-2024 | Gained hands-on experience in web development technologies and project implementation',
+                content: `
+                    <div class="detail-card">
+                        <h2>Role Overview</h2>
+                        <p>Intensive 1-month web development internship focusing on modern frontend technologies and responsive design principles.</p>
+                    </div>
+                    <div class="detail-card">
+                        <h2>Projects Completed</h2>
+                        <ul class="detail-list">
+                            <li>Responsive portfolio website with advanced CSS animations</li>
+                            <li>E-commerce product landing page with JavaScript interactivity</li>
+                            <li>Task management dashboard with local storage</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h2>Key Learnings</h2>
+                        <ul class="detail-list">
+                            <li>Advanced CSS Grid and Flexbox layouts</li>
+                            <li>JavaScript ES6+ features and DOM manipulation</li>
+                            <li>Responsive design and mobile-first approach</li>
+                            <li>Version control with Git and GitHub</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h2>Technologies</h2>
+                        <div class="tech-grid">
+                            <span class="tech-tag primary">HTML5</span>
+                            <span class="tech-tag primary">CSS3</span>
+                            <span class="tech-tag primary">JavaScript</span>
+                            <span class="tech-tag">Git</span>
+                        </div>
+                    </div>
+                `
+            },
+            'Brain-O-Vision': {
+                title: 'MERN Stack Internship - Brain-O-Vision',
+                subtitle: '23-12-2024 – 12-04-2025 | Working on full-stack development with MongoDB, Express.js, React, and Node.js',
+                content: `
+                    <div class="detail-card">
+                        <h2>Role Overview</h2>
+                        <p>4-month full-stack internship building production-ready MERN applications with emphasis on scalable architecture.</p>
+                    </div>
+                    <div class="detail-card">
+                        <h2>Key Projects</h2>
+                        <ul class="detail-list">
+                            <li>User authentication system with JWT and role-based access</li>
+                            <li>Real-time dashboard with WebSocket integration</li>
+                            <li>REST API with CRUD operations and validation</li>
+                        </ul>
+                    </div>
+                    <div class="detail-card">
+                        <h2>Technical Skills</h2>
+                        <div class="tech-grid">
+                            <span class="tech-tag primary">MongoDB</span>
+                            <span class="tech-tag primary">Express.js</span>
+                            <span class="tech-tag primary">React</span>
+                            <span class="tech-tag primary">Node.js</span>
+                            <span class="tech-tag">Redux</span>
+                            <span class="tech-tag">Socket.io</span>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Parse URL and render
+        function renderExperienceDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const role = urlParams.get('role');
+            const detail = roleDetails[role];
+
+            if (!detail) {
+                document.body.innerHTML = '<div style="text-align:center;padding:5rem;color:#666;"><h1>Role not found</h1><p><a href="index.html#experience">Back to Experiences</a></p></div>';
+                return;
+            }
+
+            document.getElementById('detailTitle').textContent = detail.title;
+            document.getElementById('detailSubtitle').textContent = detail.subtitle;
+            document.getElementById('detailContent').innerHTML = detail.content;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderExperienceDetail();
+        });
+    </script>
+    <script src="script.js"></script>
+
+</body>
+</html>

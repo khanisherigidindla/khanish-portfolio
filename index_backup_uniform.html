@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHANISH-Full Stack Developer🤞</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Portfolio</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li class="nav-item"><a href="#freelance" class="nav-link">Services</a></li>
+                <li class="nav-item"><a href="#thank-you" class="nav-link">Thank You</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating Elements -->
+    <div class="floating-element" id="floatingCircle1"></div>
+    <div class="floating-element" id="floatingCircle2"></div>
+    <div class="floating-element" id="floatingCircle3"></div>
+
+    <!-- Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero section section-alt">
+        <div class="content-wrapper">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="highlight">Khanish Erigidindla</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                         <span class="typed-text" id="typed-text"></span>
+                    </p>
+                    <p class="hero-description">
+                        Passionate about building user-friendly web applications and solving problems through code. I enjoy backend development, especially creating scalable APIs, managing databases, and writing secure, efficient server-side logic.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-card">
+                        <div class="profile-img">
+                            <img src="images/dp-pic.jpg" alt="Khanish Erigidindla">
+                        </div>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/khanish-erigidindla-00a327328/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com/khanisherigidindla" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="mailto:khanishram00@gmail.com" class="social-link"><i class="fab fa-google"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="content-wrapper">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Get to know me better</p>
+            </div>
+            <div class="about-content">
+                <div class="profile-card-large">
+                    <div class="about-image">
+                        <img src="mypic.jpg" alt="Khanish Erigidindla">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p class="about-description">
+                        I'm a recent Computer Science graduate with a passion for full-stack development. 
+                        Mastered technologies across Frontend, Backend, Database & Tools.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <h3 class="projectno">7</h3>
+                            <p class="stat-label">Projects</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="hoursno">35hr</h3>
+                            <p class="stat-label">Hours/Week</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="technologiesno">10+</h3>
+                            <p class="stat-label">Technologies</p>
+                        </div>
+                    </div>
+                    <div class="about-actions">
+                        <a href="KHANISH_RESUME___Fresher_2025.pdf" class="btn btn-primary" download>
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
+                        <button class="btn btn-secondary" onclick="toggleBio()">
+                            <i class="fas fa-info-circle"></i> More Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bio-toggle" id="bioToggle">
+                <p>
+                    Beyond coding, I'm an avid learner who stays updated with the latest technology trends. 
+                    I enjoy contributing to open-source projects and participating in hackathons. 
+                    When I'm not coding, you can find me reading tech blogs, playing chess, or exploring nature photography.
+                    My passion for continuous learning drives me to explore emerging domains such as cloud computing, AI, and cybersecurity.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education-section section section-alt">
+        <div class="content-wrapper">
+            <div class="section-header">
+                <h2 class="section-title">🎓 Education Journey</h2>
+                <p class="section-subtitle">My academic foundation and continuous learning path</p>
+            </div>
+            <div class="education-timeline">
+                <!-- Timeline content here - will style uniformly -->
+                <div class="education-item left">
+                    <div class="education-card">
+                        <div class="education-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="education-content">
+                            <div class="education-year">2021 - 2025</div>
+                            <h3 class="education-degree">B.Tech in Computer Science and Engineering</h3>
+                            <p class="education-institution">Sree Venkateswara College</p>
+                            <div class="education-grade">
+                                <span class="grade-label">Percentage:</span>
+                                <span class="grade-value">80%</span>
+                            </div>
+                            <div class="education-highlights">
+                                <span class="highlight-tag">Full Stack Development</span>
+                                <span class="highlight-tag">Data Structures & Algorithms</span>
+                                <span class="highlight-tag">Machine Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add other education items similarly -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Rest of sections follow same pattern with content-wrapper -->
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+        <div class="content-wrapper">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Technologies</h2>
+                <p class="section-subtitle">My technical Skills</p>
+            </div>
+            <div class="skills-content">
+                <!-- Skills categories -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Continue with all other sections using content-wrapper pattern -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section section-alt">
+        <div class="content-wrapper">
+            <!-- Contact content -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer section">
+        <div class="content-wrapper">
+            <!-- Footer content -->
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
