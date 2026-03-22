@@ -1,21 +1,25 @@
-# Portfolio Section Styling Task
+# Vercel Deployment Fixes - Buttons/Forms Not Working
 
-## Status: In Progress
+## Current Status
+- ✅ GitHub sync complete
+- ❌ Vercel buttons broken (Experience View Details, Services Fill Form)
 
-### Step 1: [COMPLETED] Create TODO.md
-### Step 2: [COMPLETED] Update index.html\n✅ CSS link changed to perfect-portfolio.css\n✅ Inline styles cleaned
+## Root Cause
+- script.js functions exist but not loading (asset path issue)
+- Mixed image paths causing 404s
 
-### Step 3: [COMPLETED] Enhance perfect-portfolio.css
-✅ .section-title blue fallback added
-✅ Unique themes: About(blue), Education(cyan), Experience(purple)
-✅ Learning path ready for green theme
+## Implementation Plan (6 Steps)
 
-### Step 4: Test & Verify
-- Check heading visibility (blue color)
-- Confirm unique patterns per section
-- Responsive mobile view
+### ✅ Step 1: Create TODO.md [DONE]
+### ✅ Step 2: Edit index.html - Fix paths + script defer [DONE]
+- Normalize skill icons: `/images/...` → `./*.png`
+- `<script defer src="./script.js">`
+- Consistent relative paths
 
-### Step 5: [PENDING] Final completion
+### ⏳ Step 3: Create vercel.json static config [PENDING]
+### ⏳ Step 4: Local test - npx serve [PENDING]
+### ⏳ Step 5: Git commit/push [PENDING]
+### ⏳ Step 6: Redeploy + verify [PENDING]
 
-**Goal:** Visible blue section headings + unique patterns matching portfolio theme
+**Progress: 2/6 steps complete**
 
