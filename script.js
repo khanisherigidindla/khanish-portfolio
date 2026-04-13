@@ -16,7 +16,7 @@ const typingTexts = [
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Portfolio loaded successfully');
+console.log('✅ Portfolio loaded successfully');
     initializeApp();
 });
 
@@ -663,7 +663,7 @@ function getProjectData(projectId) {
                 'Entity extraction',
                 'Multi-language support'
             ],
-            github: 'https://github.com/khanisherigidindla',
+            github: 'https://github.com/khanisherigidindla/InterviewcoachAI-Project',
             live: '#'
         },
         project3: {
@@ -678,7 +678,7 @@ function getProjectData(projectId) {
                 'Detailed analytics',
                 'Certificate generation'
             ],
-            github: 'https://github.com/khanisherigidindla',
+            github: 'https://github.com/khanisherigidindla/Quiz_Management_System',
             live: '#'
         },
         project4: {
@@ -738,12 +738,43 @@ function getProjectData(projectId) {
                 'Payment processing',
                 'Delivery tracking'
             ],
-            github: 'https://github.com/khanisherigidindla',
+            github: 'https://github.com/khanisherigidindla/grocery-store',
+            live: '#'
+        },
+        project8: {
+            title: 'Student Management System 2',
+            description: 'Advanced student management system with comprehensive features.',
+            technologies: 'Python, Flask, MySQL',
+            features: [
+                'Advanced student profiles',
+                'Grade analytics',
+                'Automated reports',
+                'Parent dashboard',
+                'Multi-admin support',
+                'Data export'
+            ],
+            github: 'https://github.com/khanisherigidindla/Student_Management_System',
+            
+        },
+        project9: {
+            title: 'QR Code Generator',
+            description: 'Full-featured QR code generation API service.',
+            technologies: 'Node.js, Express, MongoDB',
+            features: [
+                'Dynamic QR generation',
+                'Database storage',
+                'Custom QR designs',
+                'Analytics tracking',
+                'API endpoints',
+                'Download options'
+            ],
+            github: 'https://github.com/khanisherigidindla/QRCode-generator',
             live: '#'
         }
     };
     
     return projects[projectId];
+
 }
 
 // Close modal on background click
@@ -801,15 +832,17 @@ function openExperienceModal(experienceId) {
     const modalBody = document.getElementById('experienceModalBody');
 
     const experienceData = {
-        'software-trainee': {
+'software-trainee': {
             title: 'Software Trainee',
             company: 'Koundinyasa Technology',
             duration: 'Feb 9, 2026 – Present',
-            focus: 'Backend Engineering • Database Design • API Systems • Payment/Transaction Logic',
+            focus: 'Backend Developer • Database Design • API Systems',
             responsibilities: [
                 {
-                    title: 'Backend System Development (Node.js + Express)',
-                    details: 'Designed and implemented modular backend architecture using layered patterns: Controller → Service → Repository → Model. Built RESTful APIs with proper HTTP semantics (GET, POST, PUT, DELETE). Implemented input validation using schema-based validation (e.g., Zod / Joi). Applied middleware architecture: Authentication middleware (JWT-based), Error handling middleware (centralized error pipeline), Logging middleware for request tracking.'
+
+                    title: 'Backend Developer (Node.js + Express + MongoDb)',
+                    details: 'Built APIs using Node.js and Express. Added validation and middleware for secure backend.'
+
                 },
                 {
                     title: 'Authentication & Authorization',
@@ -817,11 +850,11 @@ function openExperienceModal(experienceId) {
                 },
                 {
                     title: 'Payment & Transaction Systems (High-Value Experience)',
-                    details: 'Worked on wallet-to-wallet transaction systems. Integrated payment gateway flows (e.g., PayU-like systems): Hash generation for request validation, Payment request submission, Callback/response verification. Designed: Transaction logging system, Idempotency handling (to prevent duplicate transactions), Failure recovery flows.'
+                    details: 'Worked on wallet-to-wallet transaction systems. Integrated payment gateway flows, Hash generation for request validation, Payment request submission, Callback/response verification. Designed: Transaction logging system, Idempotency handling (to prevent duplicate transactions), Failure recovery flows.'
                 },
                 {
                     title: 'Database Design & Optimization (MongoDB)',
-                    details: 'Designed normalized + scalable schema structures: Users, Wallets, Transactions, KYC data. Implemented: Indexing strategies for performance optimization, Aggregation pipelines for reporting (e.g., transaction summaries). Ensured: Data consistency, Efficient query execution. Worked on: Pagination (skip/limit pattern), Filtering and sorting APIs.'
+                    details: 'Designed normalized + scalable schema structures: Users, Wallets, Transactions, KYC data. Implemented: Indexing strategies for performance optimization, Aggregation pipelines for reporting (e.g., transaction summaries). Worked on: Pagination (skip/limit pattern), Filtering and sorting APIs.'
                 },
                 {
                     title: 'Admin Panel Backend Support',
@@ -829,10 +862,11 @@ function openExperienceModal(experienceId) {
                 },
                 {
                     title: 'Security & Best Practices',
-                    details: 'Prevented: SQL/NoSQL injection, Unauthorized access. Applied: Environment variable management, Secure API design principles. Structured code for maintainability and scalability.'
+                    details: 'Prevented: SQL/NoSQL injection, unauthorized access. Applied: Environment variable management, Secure API design principles. Structured code for maintainability and scalability.'
                 }
             ]
         },
+
         'mern-internship': {
             title: 'MERN Stack Internship',
             company: 'Brain-O-Vision',
